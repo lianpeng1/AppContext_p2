@@ -3,4 +3,4 @@
 
 2 run *getEntrypoint.py* to find entry point and generate *output1.csv*(add several mothods for testing)
 
-3 run *identifyActivationEvent.py* to generate *output.csv* which contains activation event
+3 run *identifyActivationEvent.py* to generate *output2.csv* which contains activation event
