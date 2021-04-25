@@ -45,20 +45,27 @@ def isEventHandler(string):
             return False
 
 
-origin = pd.read_csv("test/output1.csv")
+origin = pd.read_csv("test/entrypoint.csv")
+xml = pd.read_csv("test/xml.csv")
 
 entrypoint = origin["entry_point"]
 method_name = origin["sensitive_method_name"]
 
-path = "test/output2.csv"
+component = xml["component"]
+intent_filter = xml["intent_filter"]
+
+path = "test/events.csv"
 fw = codecs.open(path, 'w', 'utf-8')
 fw.write("sensitive_method_name,entry_point,activation_event\n")
 for i in range(len(entrypoint)):
     activation_events=[]
-    if isLifecyle(entrypoint[i].split('.')[1]):
-        activation_event=entrypoint[i].split('.')[1]
-    if isEventHandler(entrypoint[i].split('.')[1]):
-        activation_event=entrypoint[i].split('.')[1]
-    else:
-        activation_event=entrypoint[i].split('.')[1]
+    # if isLifecyle(entrypoint[i].split('.')[1]):
+        # activation_event=entrypoint[i].split('.')[1]
+    # if isEventHandler(entrypoint[i].split('.')[1]):
+        # activation_event=entrypoint[i].split('.')[1]
+    # else:
+    for j in range(len(component)):
+        if entrypoint[i].split('.')[0] in component[j]:
+            activation_event = intent_filter[j]
     fw.write("".join([method_name[i], ",", entrypoint[i], ",", activation_event,  "\n"]))
+fw.close()

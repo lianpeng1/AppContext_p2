@@ -1,3 +1,0 @@
-sensitive_method_name,entry_point,activation_event
-SmsManager.sendTextMessage,zjService.bg_sendSms,bg_sendSms
-Service.onStart,zjService.onStart,onStart

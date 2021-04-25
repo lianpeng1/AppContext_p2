@@ -29,7 +29,7 @@ def getEntrypoint(sensitive_method, method_list, entrypoint, edge_source, edge_t
 
 
 
-path = ("tool/callgraph.gml")
+path = ("test/callgraph.gml")
 
 G = nx.read_gml(path)
 entrypoint=[]
@@ -67,13 +67,13 @@ fo.close()
 #             tmp_ix = edge_source[tmp_ix]
 #             print(entrypoint[int(tmp_ix)])
 
-path = "test/output1.csv"
+path = "test/entrypoint.csv"
 fw = codecs.open(path, 'w', 'utf-8')
 fw.write("sensitive_method_name,entry_point\n")
 
 sensitive_method_name=[]
-sensitive_method_name.append('SmsManager.sendTextMessage')
-sensitive_method_name.append('Service.onStart')
+sensitive_method_name.append('zjReceiver.WriteRec')
+
 
 
 for method_name in sensitive_method_name:
