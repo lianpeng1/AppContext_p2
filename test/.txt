@@ -1,5 +1,0 @@
-.TingTing21
-.readme
-com.google.ads.AdActivity
-com.GoldDream.zj.zjReceiver
-com.GoldDream.zj.zjService
