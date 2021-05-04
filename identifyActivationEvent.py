@@ -3,6 +3,16 @@ import os
 import codecs
 import csv
 
+def processStr(string):
+    string = string.replace('<',' ')
+    string = string.replace('.',' ')
+    string = string.replace(':',' ')
+    string = string.replace('(',' ')
+    string = string.replace(')',' ')
+    string = string.replace('|',' ')
+    string = string.replace('>',' ')
+    string = string.replace(',',' ')
+    return string
 
 def isLifecyle(entrypoint):
     lifecycle=[]
@@ -12,18 +22,19 @@ def isLifecyle(entrypoint):
     lifecycle.append('onPause')
     lifecycle.append('onStop')
     lifecycle.append('onDestroy')
+    lifecycle.append('onReceive')
+    lifecycle.append('onDestroy')
     for i in lifecycle:
-        if i in entrypoint:
+        if i in processStr(entrypoint).split(' '):
             return True
     return False
 
-
-# def findICC(entry_point):
 
 def isEventHandler(entrypoint):
     eventHandler=[]
     eventHandler.append('onClick')
     eventHandler.append('onLongClick')
+    eventHandler.append('onItemClick')
     eventHandler.append('onFocusChange')
     eventHandler.append('onKey')
     eventHandler.append('onTouch')
@@ -32,6 +43,8 @@ def isEventHandler(entrypoint):
     eventHandler.append('onItemSelected')
     eventHandler.append('onDataChanged')
     eventHandler.append('onTimeChanged')
+    eventHandler.append('onContextItemSelected')
+    eventHandler.append('onMenuItemSelected')
     
     eventHandler.append('onKeyDown')
     eventHandler.append('onKeyUp')
