@@ -11,8 +11,8 @@ def xmltocsv(source_filePath,output_file_path):
         root = tree.getroot()
     except Exception:
         print("Excetion"+ source_filePath)
-        return
-    packagename = root.attrib["package"]
+        return False
+    dummy_packagename = root.attrib["package"]
     application = root.find("application")
     
     fw = codecs.open(output_file_path, 'w', 'utf-8')
@@ -23,7 +23,7 @@ def xmltocsv(source_filePath,output_file_path):
             component_name = component.attrib[namespace+'name']
         except Exception:
             print("Exception"+source_filePath)
-            return
+            return False
         intent_filter = component.find("intent-filter")
         if intent_filter is not None:
             actionlist = intent_filter.findall('action')
@@ -36,14 +36,13 @@ def xmltocsv(source_filePath,output_file_path):
                     attribute = attribute + category.attrib[namespace + "name"] + '|'
         fw.write("".join([component_name, ",", attribute,  "\n"]))
     fw.close()
+    return True
 
 
-def findxml(smali_path):
+def findxml(smali_path,benign_path,malware_path):
     smali_path1=os.path.join(smali_path, "benign")
     smali_path2=os.path.join(smali_path, "malware")
-    benign_path = "xml/benign"
-    malware_path= "xml/malware"
-
+    
     if not os.path.exists(benign_path):
         os.makedirs(benign_path)
     if not os.path.exists(malware_path):
@@ -78,4 +77,6 @@ def findxml(smali_path):
 
 
 if __name__ == "__main__":
-    findxml("./smali")
+    benign_path = "xml/benign"
+    malware_path= "xml/malware"
+    findxml("./smali",benign_path,malware_path)

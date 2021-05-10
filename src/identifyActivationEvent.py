@@ -59,9 +59,9 @@ def isEventHandler(entrypoint):
             return i
     return
 
-def hasIntentFilters(apk_name, entrypoint):
-    path1 = 'xml/benign'
-    path2 = 'xml/malware'
+def hasIntentFilters(apk_name, entrypoint,path1,path2):
+    # path1 = 'xml/benign'
+    # path2 = 'xml/malware'
     for file in os.listdir(path1):
         if apk_name == file:
             file_path = os.path.join(path1, file)
@@ -82,7 +82,7 @@ def hasIntentFilters(apk_name, entrypoint):
 
 
 
-def identifyenvet(filename):
+def identifyenvet(filename,xml_benign_folder,xml_malware_folder,output_folder):
     apk_name=[]
     permission=[]
     method=[]
@@ -95,16 +95,20 @@ def identifyenvet(filename):
             method.append(row[2])
             entry_point.append(row[3])
     
-    outputfile = filename.split('.')[0]+'Event.csv'
+    outputfile = filename.split('.')[0].split('/')[1]+'Event.csv'
+    outputfile = os.path.join(output_folder,outputfile)
+
+    path1 = xml_benign_folder
+    path2 = xml_malware_folder
 
     with open(outputfile, 'w') as fw:
         writer = csv.writer(fw)
         for i, method_i in enumerate(method):
             activation_event = ''
             if isLifecyle(entry_point[i]):
-                if hasIntentFilters(apk_name[i], entry_point[i]) is not None:
+                if hasIntentFilters(apk_name[i], entry_point[i],path1,path2) is not None:
                     # system event
-                    activation_event+=hasIntentFilters(apk_name[i], entry_point[i])
+                    activation_event+=hasIntentFilters(apk_name[i], entry_point[i],path1,path2)
                     activation_event+='|'
                 else:
                     # hardware event
@@ -119,16 +123,15 @@ def identifyenvet(filename):
 
 
 if __name__ == "__main__":
-    # if hasIntentFilters() is not None:
-    #     print(hasIntentFilters())
-    # else:
-    #     print(0)
-    # identifyenvet('DowginOut.csv')
     inputfile=[]
-    inputfile.append('DowginOut.csv')
-    inputfile.append('AirpushOut.csv')
-    inputfile.append('KuguoOut.csv')
-    inputfile.append('YoumiOut.csv')
-    inputfile.append('FakeInstOut.csv')
+    inputfile.append('input/DowginOut.csv')
+    inputfile.append('input/AirpushOut.csv')
+    inputfile.append('input/KuguoOut.csv')
+    inputfile.append('input/YoumiOut.csv')
+    inputfile.append('input/FakeInstOut.csv')
+    inputfile.append('input/benignOut.csv')
+
+    xml_benign_folder = 'xml/benign'
+    xml_malware_folder = 'xml/malware'
     for i in inputfile:
-        identifyenvet(i)
+        identifyenvet(i,xml_benign_folder,xml_malware_folder,'output')

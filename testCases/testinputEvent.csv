@@ -1,0 +1,1 @@
+0058f6e5225c519df0c0402313061253.apk,android.permission.INTERNET,<java.net.URL: java.net.URLConnection openConnection()>,"<com.uniplugin.sender.AReceiver: void onReceive(android.content.Context,android.content.Intent)>",|android.intent.action.BOOT_COMPLETED|android.intent.action.PHONE_STATE||
