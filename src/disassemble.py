@@ -17,6 +17,9 @@ def disassemble_apk(frompath, topath):
         return False
 
 def toSmali(apk_path,smali_folder):
+    # apk_path: a folder that stores apk
+    # smali_folder: a folder that stores outpuf files by using apktool
+
     apk_path1=os.path.join(apk_path, "benign")
     apk_path2=os.path.join(apk_path, "Airpush")
     apk_path3=os.path.join(apk_path, "Kuguo")

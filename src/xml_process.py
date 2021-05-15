@@ -80,3 +80,5 @@ if __name__ == "__main__":
     benign_path = "xml/benign"
     malware_path= "xml/malware"
     findxml("./smali",benign_path,malware_path)
+    # benign_path is a folder that stores the output of processing benign apk's AndroidManifest.xml
+    # malware_path ......
